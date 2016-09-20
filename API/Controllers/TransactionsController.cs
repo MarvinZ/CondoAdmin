@@ -17,7 +17,6 @@ namespace API.Controllers
     {
         private Context db = new Context();
 
-
         [ResponseType(typeof(List<TransactionDTO>))]
         public IHttpActionResult GetTransactionsByMemberId(int id)
         {
@@ -38,8 +37,6 @@ namespace API.Controllers
             }).ToList();
             return Ok(result);
         }
-
-        
 
         // POST: api/Transactions
         [ResponseType(typeof(Transaction))]
@@ -165,7 +162,6 @@ namespace API.Controllers
     public class TransactionDTO
     {
         virtual public int Id { get; set; }
-
         //virtual public int MemberId { get; set; }
         //virtual public Member Member { get; set; }
         virtual public string TransactionType { get; set; }
@@ -182,7 +178,6 @@ namespace API.Controllers
         virtual public int CondoId { get; set; }
         virtual public decimal Amount { get; set; }
         virtual public string Description { get; set; }
-
         virtual public string CreatedBy { get; set; }
     }
 }
