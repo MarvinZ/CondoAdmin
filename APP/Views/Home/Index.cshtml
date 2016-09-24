@@ -22,6 +22,7 @@
                             Edit
                         </th>
                         <th>Member</th>
+                        <th>People</th>
                         <th>Balance</th>
                         <th>Status</th>
                         @*<th>Introduction Date</th>
@@ -49,6 +50,11 @@
                             </a>
                         </td>
                         <td>{{member.Name}}</td>
+                        <td>
+                            <ul ng-repeat="person in member.People">
+                                <li> {{person.Name}} </li>
+                            </ul>
+                        </td>
                         <td>{{member.Balance}}</td>
                         <td>{{member.Status}}</td>
 
@@ -251,7 +257,7 @@
                 </div>
             </div>
         </div>
-         @*View Trasnactions*@
+        @*View Trasnactions*@
         <div ng-show="vm.uiState.isViewTransactionsVisible" class="panel panel-primary">
             <div class="panel-heading">
                 <h1 class="panel-title">
@@ -262,30 +268,30 @@
                 <table id="transactionsTable"
                        class="table table-condensed table-bordered table-striped table-hover">
                     <thead>
-                    <tr>
+                        <tr>
 
-                        <th>Description</th>
-                        <th>Type</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                    </tr>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="tran in vm.transactions ">
+                        <tr ng-repeat="tran in vm.transactions ">
 
-                        <td>{{tran.Description}}</td>
-                        <td>{{tran.Type}}</td>
-                        <td>{{tran.Amount}}</td>
-                        <td>{{tran.Date}}</td>
-                    </tr>
+                            <td>{{tran.Description}}</td>
+                            <td>{{tran.Type}}</td>
+                            <td>{{tran.Amount}}</td>
+                            <td>{{tran.Date}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-12">
-                
+
                         <button class="btn btn-sm btn-primary"
                                 type="button"
                                 ng-click="vm.cancelClick()">
@@ -297,7 +303,7 @@
             </div>
         </div>
 
-        
+
     </form>
 </div>
 

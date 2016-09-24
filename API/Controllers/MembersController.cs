@@ -26,20 +26,54 @@ namespace API.Controllers
         [ResponseType(typeof(List<MemberDTO>))]
         public IHttpActionResult GetMembersByCondoId(int id)
         {
-            var members = db.Members.Where(e => e.CondoId == id);
+            var members = db.Members.Where(e => e.CondoId == id).ToList();
             if (!members.Any())
             {
                 return NotFound();
             }
 
-            var result = members.Select(member => new MemberDTO()
+            var memberpersonGeneric = new MemberPersonDTO
             {
-                Id = member.Id,
-                Balance = member.Balance,
-                Name = member.Name,
-                Status = member.Status.Name
+               Id = 1,
+               Name = "Joe"
+            };
+         //   var peopleGeneric = new List<MemberPersonDTO> {memberpersonGeneric, memberpersonGeneric};
+            //var result = members.Select(member => new MemberDTO()
+            //{
+            //    Id = member.Id,
+            //    Balance = member.Balance,
+            //    Name = member.Name,
+            //    Status = member.Status.Name,
+            //    People = memberpersonGeneric
 
-            }).ToList();
+            //}).ToList();
+
+            var result = new List<MemberDTO>();
+            foreach (var member in members)
+            {
+                var peopleGenericList = new List<MemberPersonDTO> ();
+                foreach (var rep in member.MemberPeople)
+                {
+                    var peopleGeneric = new MemberPersonDTO
+                    {
+                        Id = 1,
+                        Name = rep.Person.FirstName + " " + rep.Person.LastName
+
+                    };
+                    peopleGenericList.Add(peopleGeneric);
+                }
+              
+
+                var membercito = new MemberDTO()
+                {
+                    Id = member.Id,
+                    Balance = member.Balance,
+                    Name = member.Name,
+                    Status = member.Status.Name,
+                    People = peopleGenericList
+                };
+                result.Add(membercito);
+            }
             return Ok(result);
         }
 
@@ -143,7 +177,16 @@ namespace API.Controllers
           //  public virtual ICollection<Person> Representatives { get; set; }
             public virtual decimal Balance { get; set; }
             public virtual string Status { get; set; }
-           // public virtual ICollection<MemberPerson> MemberPeople { get; set; }
+            public virtual List<MemberPersonDTO>  People { get; set; }
+            // public virtual ICollection<MemberPerson> MemberPeople { get; set; }
+        }
+        public class MemberPersonDTO
+        {
+            public virtual int Id { get; set; }
+            public virtual string Name { get; set; }
+            //  public virtual ICollection<Person> Representatives { get; set; }
+
+            // public virtual ICollection<MemberPerson> MemberPeople { get; set; }
         }
 
     }
