@@ -71,7 +71,7 @@ namespace REPO.Migrations
                 StatusId = 1
             };
             context.Members.AddOrUpdate(
-               p => p.Name, member1, member2,member3, member4
+               p => p.Id, member1, member2, member3, member4
              );
 
             //create people
@@ -160,7 +160,72 @@ namespace REPO.Migrations
          ,
          new Transaction { Id = 4, Amount = 12000, TransactionTypeId = 1, MemberId = 2, Description = "Agua Enero", TransactionDateTime = DateTime.Now, CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
         );
+            context.Amenities.AddOrUpdate(
+               p => p.Id, new Amenity()
+               {
+                   Id = 1,
+                   Name = "Piscina",
+                   CondoId = 1,
+                   Description = "tiene agua mojada y fria"
+               },
+               new Amenity()
+               {
+                   Id = 2,
+                   Name = "Rancho # 1",
+                   CondoId = 1,
+                   Description = "Para las carne asadas! mmmm"
+               },
+               new Amenity()
+               {
+                   Id = 3,
+                   Name = "Sala de Cina",
+                   CondoId = 1,
+                   Description = "Para jugar play"
+               }
+             );
 
+            context.AmenityReservationStatuses.AddOrUpdate(
+                p => p.Id, new AmenityReservationStatus()
+                {
+                    Id = 1,
+                    Name = "Active"
+                },
+                new AmenityReservationStatus()
+                {
+                    Id = 2,
+                    Name = "In progress"
+                },
+                new AmenityReservationStatus()
+                {
+                    Id = 3,
+                    Name = "Finalized"
+                },
+                new AmenityReservationStatus()
+                {
+                    Id = 6,
+                    Name = "Cancelled"
+                });
+
+            context.AmenityReservations.AddOrUpdate(
+                p => p.Id, new AmenityReservation()
+                {
+                    Id = 1,
+                    AmenityId = 1,
+                    MemberId = 3,
+                    PersonId = 1,
+                    AmenityReservationStatusId = 1,
+                    StartTime = DateTime.Now,
+                    EndDatetime = DateTime.UtcNow
+                }, new AmenityReservation()
+                {
+                    Id = 2,
+                    AmenityId = 1,
+                    MemberId = 4,
+                    PersonId = 3,
+                    AmenityReservationStatusId = 1,
+                    StartTime = DateTime.Now.AddDays(3),
+                    EndDatetime = DateTime.UtcNow.AddDays(3)
+                });
             //
         }
     }

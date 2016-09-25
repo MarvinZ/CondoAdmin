@@ -41,8 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audit.cs" />
+    <Compile Include="Amenity.cs" />
+    <Compile Include="AmenityReservation.cs" />
     <Compile Include="MemberPerson.cs" />
     <Compile Include="Condo.cs" />
+    <Compile Include="GENERIC_CLASS.cs" />
+    <Compile Include="AmenityReservationStatus.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="Status.cs" />
