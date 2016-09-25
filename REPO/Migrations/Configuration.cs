@@ -29,6 +29,13 @@ namespace REPO.Migrations
 
           );
 
+            //status
+            context.Statuses.AddOrUpdate(
+             p => p.Id,
+             new Status { Id = 1, Name = "Al dia", CreateDatetime = DateTime.Now, CreatedBy = "Seed" },
+             new Status { Id = 2, Name = "Moroso", CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
+           );
+
             //add members to condo
             var member1 = new Member
             {
@@ -138,12 +145,7 @@ namespace REPO.Migrations
 
             context.MemberPersons.AddOrUpdate(p => p.Id, memberPerson1, memberPerson2, memberPerson3);
 
-            //status
-            context.Statuses.AddOrUpdate(
-             p => p.Id,
-             new Status { Id = 1, Name = "Al dia", CreateDatetime = DateTime.Now, CreatedBy = "Seed" },
-             new Status { Id = 2, Name = "Moroso", CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
-           );
+
             //transactionTypes
             context.TransactionTypes.AddOrUpdate(
              p => p.Id,
@@ -211,7 +213,7 @@ namespace REPO.Migrations
                 {
                     Id = 1,
                     AmenityId = 1,
-                    MemberId = 3,
+                    MemberId = 1,
                     PersonId = 1,
                     AmenityReservationStatusId = 1,
                     StartTime = DateTime.Now,
@@ -220,13 +222,13 @@ namespace REPO.Migrations
                 {
                     Id = 2,
                     AmenityId = 1,
-                    MemberId = 4,
+                    MemberId = 2,
                     PersonId = 3,
                     AmenityReservationStatusId = 1,
                     StartTime = DateTime.Now.AddDays(3),
                     EndDatetime = DateTime.UtcNow.AddDays(3)
                 });
-            //
+
         }
     }
 }

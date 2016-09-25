@@ -43,7 +43,11 @@ namespace REPO
         //public virtual DbSet<Member> MyEntities { get; set; }
 
         //public virtual DbSet<Member> MyEntities { get; set; }
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<AmenityReservation>().HasRequired(i => i.Member).WithMany().WillCascadeOnDelete(false);
+        }
 
     }
 

@@ -14,7 +14,7 @@ namespace POCO
         virtual public Amenity Amenity { get; set; }
 
         virtual public int MemberId { get; set; }
-//        virtual public Member Member { get; set; }
+        virtual public Member Member { get; set; }
 
 
         virtual public int PersonId { get; set; }

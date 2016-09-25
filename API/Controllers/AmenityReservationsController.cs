@@ -34,7 +34,7 @@ namespace API.Controllers
             {
                 Id = rsv.Id,
                 Amenity = rsv.Amenity.Name,
-                Member = rsv.MemberId.ToString(),
+                Member = rsv.Member.Name,
                 Person = rsv.Person.FirstName+" "+rsv.Person.LastName,
                 StartDateTime = rsv.StartTime,
                 EndDateTime = rsv.EndDatetime,
