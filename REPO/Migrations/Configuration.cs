@@ -24,8 +24,8 @@ namespace REPO.Migrations
             //add condo
             context.Condos.AddOrUpdate(
            p => p.Id,
-           new Condo { Id = 1, Name = "Vistas de Monserrat", CreateDatetime = DateTime.Now, CreatedBy = "Seed" },
-                      new Condo { Id = 2, Name = "Other condo..", CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
+           new Condo { Id = 1, Name = "Vistas de Monserrat", CreateDatetime = DateTime.Now, CreatedBy = "Seed", Balance = 5000000},
+                      new Condo { Id = 2, Name = "Other condo..", CreateDatetime = DateTime.Now, CreatedBy = "Seed", Balance = 250000000 }
 
           );
 
@@ -228,6 +228,25 @@ namespace REPO.Migrations
                     StartTime = DateTime.Now.AddDays(3),
                     EndDatetime = DateTime.UtcNow.AddDays(3)
                 });
+
+
+            /**********************************Condo Transactions********************************/
+            //transactionTypes
+            context.CondoTransactionTypes.AddOrUpdate(
+             p => p.Id,
+             new CondoTransactionType { Id = 1, Name = "Seguridad", CreateDatetime = DateTime.Now, CreatedBy = "Seed" },
+             new CondoTransactionType { Id = 2, Name = "Administracion", CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
+            );
+
+            context.CondoTransactions.AddOrUpdate(
+p => p.Id,
+new CondoTransaction { Id = 1, Amount = 1000000, CondoTransactionTypeId = 1, CondoId = 1, Description = "Seguridad Enero", TransactionDateTime = DateTime.Now, CreateDatetime = DateTime.Now, CreatedBy = "Seed" },
+new CondoTransaction { Id = 2, Amount = 1000000, CondoTransactionTypeId = 1, CondoId = 1, Description = "Seguridad Febrero", TransactionDateTime = DateTime.Now, CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
+,
+new CondoTransaction { Id = 3, Amount = 500000, CondoTransactionTypeId = 2, CondoId = 1, Description = "Administracion Enero", TransactionDateTime = DateTime.Now, CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
+,
+new CondoTransaction { Id = 4, Amount = 500000, CondoTransactionTypeId = 2, CondoId = 1, Description = "Administracion Febrero", TransactionDateTime = DateTime.Now, CreateDatetime = DateTime.Now, CreatedBy = "Seed" }
+);
 
         }
     }

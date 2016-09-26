@@ -47,6 +47,8 @@
     <Compile Include="Condo.cs" />
     <Compile Include="GENERIC_CLASS.cs" />
     <Compile Include="AmenityReservationStatus.cs" />
+    <Compile Include="CondoTransaction.cs" />
+    <Compile Include="CondoTransactionType.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="Status.cs" />

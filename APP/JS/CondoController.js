@@ -9,49 +9,15 @@
 
         // Hook up public events
 
-        vm.addCharge = addCharge;
-        vm.addGeneralCharge = addGeneralCharge;
-        vm.addPayment = addPayment;
-        vm.processPayment = processPayment;
-        vm.processCharge = processCharge;
-        vm.processGeneralCharge = processGeneralCharge;
+        vm.addGeneralCharge = addPayment;
+        vm.processGeneralCharge = processPayment;
         vm.viewTransactions = viewTransactions;
         vm.cancelClick = cancelClick;
-        vm.getMemberList = getMemberList;
-
-
-
+        
 
         vm.condoId = 1;
         vm.testId = 9999999;
-        vm.members = [];
-
-        //vm.members = [
-        //          {
-        //              "Id": 1,
-        //              "Name": "Casa 1A-1",
-        //              "Balance": -4975,
-        //              "Status": "Moroso"
-        //          },
-        //          {
-        //              "Id": 2,
-        //              "Name": "Casa 1A-2",
-        //              "Balance": -4975,
-        //              "Status": "Moroso"
-        //          },
-        //          {
-        //              "Id": 3,
-        //              "Name": "Casa 28b-2",
-        //              "Balance": 25,
-        //              "Status": "Al dia"
-        //          },
-        //          {
-        //              "Id": 4,
-        //              "Name": "Casa 29b-1",
-        //              "Balance": -4975,
-        //              "Status": "Moroso"
-        //          }
-        //];
+       
 
         vm.transactions = [
             {
@@ -84,15 +50,8 @@
             }
         ];
 
+      
         vm.payment = {
-            amount: 0,
-            description: ""
-        };
-        vm.charge = {
-            amount: 0,
-            description: ""
-        };
-        vm.generalCharge = {
             CondoId: 1,
             Amount: 0,
             Description: "",
@@ -102,9 +61,7 @@
 
         var pageMode = {
             MAIN: 'Main',
-            ADDCHARGE: 'AddCharge',
-            ADDGENERALCHARGE: 'AddGeneralCharge',
-            ADDPAYMENT: 'AddPayment',
+            PAYMENT: 'Payment',
             TRANSACTIONS: 'Transactions'
 
         };
@@ -112,9 +69,8 @@
         vm.uiState = {
             mode: pageMode.MAIN,
             isMainAreaVisible: true,
+            isViewTransactionsVisible: true,
             isAddPaymentVisible: false,
-            isAddChargeVisible: false,
-            isAddGeneralChargeVisible: false,
             isValid: true,
             messages: []
         };
@@ -124,49 +80,19 @@
             setUIState(pageMode.MAIN);
         }
 
-        function getMemberList() {
-            //alert("getting the member list!");
-            // Call Web API to get a product
-            dataService.get("http://localhost:11618/api/Members/GetMembersByCondoId/1")
-              .then(function (result) {
-                  // Display product
-                  vm.members = result.data;
-
-                  // Convert date to local date/time format
-                  //if (vm.product.IntroductionDate != null) {
-                  //    vm.product.IntroductionDate =
-                  //      new Date(vm.product.IntroductionDate).
-                  //      toLocaleDateString();
-                  //}
-              }, function (error) {
-                  handleException(error);
-              });
-        }
-
-
-
+      
 
         function processPayment(someObject) {
-            alert("payment success!!");
-            console.log(someObject);
-            setUIState(pageMode.MAIN);
-        }
-        function processCharge(someObject) {
-            alert("charge success!!");
-            console.log(someObject);
-            setUIState(pageMode.MAIN);
-        }
-        function processGeneralCharge(someObject) {
             dataService.post(
                 "http://localhost:11618/api/Transactions/CreateCondoCharge",
-                vm.generalCharge)
+                vm.payment)
               .then(function (result) {
                   // Update product object
-                  vm.generalCharge = result.data;
+                  vm.payment = result.data;
 
                   //// Add Product to Array
                   //vm.surveys.push(vm.survey);
-                  getMemberList();
+                //  getMemberList();
                   //setUIState(pageMode.MAIN);
               }, function (error) {
                   handleException(error);
@@ -181,22 +107,16 @@
 
 
         //change view functions
-        function addCharge(id) {
-            vm.testId = id;
-            setUIState(pageMode.ADDCHARGE);
-        }
+     
 
-        function addGeneralCharge(id) {
-            vm.testId = id;
-            setUIState(pageMode.ADDGENERALCHARGE);
-        }
         function addPayment(id) {
             vm.testId = id;
-            setUIState(pageMode.ADDPAYMENT);
+            setUIState(pageMode.PAYMENT);
         }
+      
         function viewTransactions(id) {
             vm.testId = id;
-            setUIState(pageMode.TRANSACTIONS);
+            setUIState(pageMode.MAIN);
         }
 
         function validateData() {
@@ -229,10 +149,8 @@
             vm.uiState.mode = state;
 
             vm.uiState.isDetailAreaVisible = (state === pageMode.MAIN);
-            vm.uiState.isAddChargeVisible = (state === pageMode.ADDCHARGE);
-            vm.uiState.isAddGeneralChargeVisible = (state === pageMode.ADDGENERALCHARGE);
-            vm.uiState.isAddPaymentVisible = (state === pageMode.ADDPAYMENT);
-            vm.uiState.isViewTransactionsVisible = (state === pageMode.TRANSACTIONS);
+            vm.uiState.isAddPaymentVisible = (state === pageMode.PAYMENT);
+            vm.uiState.isViewTransactionsVisible = (state === pageMode.MAIN);//TRANSACTIONS
         }
 
         function initEntity() {
@@ -296,7 +214,6 @@
 
 
         //execute on load
-
-        getMemberList();
+        viewTransactions(1);
     }
 })();

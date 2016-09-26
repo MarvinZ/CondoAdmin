@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AmenityController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -182,20 +183,22 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.js" />
-    <Content Include="AmenityApp.js" />
-    <Content Include="CalendarApp.js" />
-    <Content Include="AmenityController.js" />
-    <Content Include="CalendarController.js" />
-    <Content Include="CondoController.js" />
+    <Content Include="JS\CondoController.js" />
+    <Content Include="JS\MemberApp.js" />
+    <Content Include="JS\app.js" />
+    <Content Include="JS\AmenityApp.js" />
+    <Content Include="JS\CalendarApp.js" />
+    <Content Include="JS\AmenityController.js" />
+    <Content Include="JS\CalendarController.js" />
+    <Content Include="JS\MemberController.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="helpers.js" />
-    <Content Include="AmenityHelpers.js" />
+    <Content Include="JS\helpers.js" />
+    <Content Include="JS\AmenityHelpers.js" />
     <Content Include="Content\Templates\modalContent.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -1035,6 +1038,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Amenity\Index.cshtml" />
+    <Content Include="Views\Member\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

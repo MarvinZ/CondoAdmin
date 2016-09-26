@@ -7,145 +7,65 @@
     <form name="myForm" class="form-horizontal" novalidate>
         @*Main*@
         <div ng-show="vm.uiState.isMainAreaVisible" class="panel panel-primary">
+            <p>Some info here</p>
+            <br />
+            <hr />
 
+            <p>More info here</p> 
+            <br />
+            <hr />
             <button class="btn btn-sm btn-primary"
                     type="button"
                     ng-click="vm.addGeneralCharge(vm.condoId)">
                 <i class="glyphicon glyphicon-remove-circle"></i>
-                &nbsp;General Charge
+                &nbsp;Add Payment
             </button>
-            <table id="MembersTable"
-                   class="table table-condensed table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th class="pdsa-action-button-column">
-                            Edit
-                        </th>
-                        <th>Member</th>
-                        <th>People</th>
-                        <th>Balance</th>
-                        <th>Status</th>
-                        @*<th>Introduction Date</th>
-                            <th>Url</th>
-                            <th>Price</th>*@
-                        <th class="pdsa-action-button-column">
-                            Add Charge
-                        </th>
-                        <th class="pdsa-action-button-column">
-                            Add Payment
-                        </th>
-                        <th class="pdsa-action-button-column">
-                            View Transactions
-                        </th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <tr ng-repeat="member in vm.members ">
-                        <td class="pdsa-action-button-column">
-                            <a href="#"
-                               ng-click="vm.editClick(member.Id)"
-                               class="btn btn-default btn-sm">
-                                <i class="glyphicon glyphicon-edit"></i>
-                            </a>
-                        </td>
-                        <td>{{member.Name}}</td>
-                        <td>
-                            <ul ng-repeat="person in member.People">
-                                <li> {{person.Name}} </li>
-                            </ul>
-                        </td>
-                        <td>{{member.Balance}}</td>
-                        <td>{{member.Status}}</td>
-
-
-                        <td class="pdsa-action-button-column">
-                            <a href="#"
-                               ng-click="vm.addCharge(member.Id)"
-                               class="btn btn-default btn-sm">
-                                Add Charge
-                            </a>
-                        </td>
-                        <td class="pdsa-action-button-column">
-                            <a href="#"
-                               ng-click="vm.addPayment(member.Id)"
-                               class="btn btn-default btn-sm">
-                                @*<i class="glyphicon glyphicon-trash"></i>*@
-                                Add Payment
-                            </a>
-                        </td>
-                        <td class="pdsa-action-button-column">
-                            <a href="#"
-                               ng-click="vm.viewTransactions(member.Id)"
-                               class="btn btn-default btn-sm">
-                                @*<i class="glyphicon glyphicon-trash"></i>*@
-                                View Transactions
-                            </a>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
         </div>
-        @*Add  Charge*@
-        <div ng-show="vm.uiState.isAddChargeVisible" class="panel panel-primary">
 
+        @*View Transactions*@
+        <div ng-show="vm.uiState.isViewTransactionsVisible" class="panel panel-primary">
             <div class="panel-heading">
                 <h1 class="panel-title">
-                    Add Charge for id: {{vm.testId}}
+                    View Transactions for id: {{vm.testId}}
                 </h1>
             </div>
             <div class="panel-body">
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="chargeAmount">Amount:</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control input-md"
-                                   id="chargeAmount"
-                                   name="chargeAmount"
-                                   required
-                                   @*ng-minlength="4"
-                           ng-maxlength="150"*@
-                                   ng-model="vm.charge.amount" />
-                            <span class="help-block">Enter the amount of the charge</span>
+                <table id="transactionsTable"
+                       class="table table-condensed table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
 
-                        </div>
-                    </div>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Description:</label>
-                        <div class="col-md-4">
-                            <input id="chargeDescription" name="chargeDescription" type="text" placeholder="Description" class="form-control input-md" required="" ng-model="vm.charge.description">
-                            <span class="help-block">Enter the description of the charge</span>
-                        </div>
-                    </div>
-                </fieldset>
+                    <tbody>
+                        <tr ng-repeat="tran in vm.transactions ">
 
-
-                <!-- ** END INPUT AREA -->
+                            <td>{{tran.Description}}</td>
+                            <td>{{tran.Type}}</td>
+                            <td>{{tran.Amount}}</td>
+                            <td>{{tran.Date}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-12">
-                        <button class="btn btn-sm btn-primary"
-                                type="button"
-                                ng-click="vm.processCharge(myForm)">
-                            <i class="glyphicon glyphicon-floppy-disk"></i>
-                            &nbsp;Process Charge
-                        </button>
-                        <button class="btn btn-sm btn-primary"
-                                type="button"
-                                ng-click="vm.cancelClick()">
-                            <i class="glyphicon glyphicon-remove-circle"></i>
-                            &nbsp;Cancel
-                        </button>
+
+
                     </div>
                 </div>
             </div>
-
         </div>
-        @*Add General Charge*@
-        <div ng-show="vm.uiState.isAddGeneralChargeVisible" class="panel panel-primary">
+
+        @*Add Payment *@
+        <div ng-show="vm.uiState.isAddPaymentVisible" class="panel panel-primary">
             <div class="panel-heading">
                 <h1 class="panel-title">
                     Add General Charge for condo id: {{vm.condoId}}
@@ -199,115 +119,11 @@
                 </div>
             </div>
         </div>
-        @*Add Payment*@
-        <div ng-show="vm.uiState.isAddPaymentVisible" class="panel panel-primary">
-
-            <div class="panel-heading">
-                <h1 class="panel-title">
-                    Add Payment for id: {{vm.testId}}
-                </h1>
-            </div>
-            <div class="panel-body">
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="paymentAmount">Amount:</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control input-md"
-                                   id="paymentAmount"
-                                   name="paymentAmount"
-                                   required
-                                   @*ng-minlength="4"
-                           ng-maxlength="150"*@
-                                   ng-model="vm.payment.amount" />
-                            <span class="help-block">Enter the amount of the payment</span>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Description:</label>
-                        <div class="col-md-4">
-                            <input id="paymentDescription" name="paymentDescription" type="text" placeholder="Description" class="form-control input-md" required="" ng-model="vm.payment.description">
-                            <span class="help-block">Enter the description of the payment</span>
-                        </div>
-                    </div>
-                </fieldset>
-
-
-
-
-                <!-- ** END INPUT AREA -->
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button class="btn btn-sm btn-primary"
-                                type="button"
-                                ng-click="vm.processPayment(myForm)">
-                            <i class="glyphicon glyphicon-floppy-disk"></i>
-                            &nbsp;Process Payment
-                        </button>
-                        <button class="btn btn-sm btn-primary"
-                                type="button"
-                                ng-click="vm.cancelClick()">
-                            <i class="glyphicon glyphicon-remove-circle"></i>
-                            &nbsp;Cancel
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @*View Trasnactions*@
-        <div ng-show="vm.uiState.isViewTransactionsVisible" class="panel panel-primary">
-            <div class="panel-heading">
-                <h1 class="panel-title">
-                    View Transactions for id: {{vm.testId}}
-                </h1>
-            </div>
-            <div class="panel-body">
-                <table id="transactionsTable"
-                       class="table table-condensed table-bordered table-striped table-hover">
-                    <thead>
-                        <tr>
-
-                            <th>Description</th>
-                            <th>Type</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr ng-repeat="tran in vm.transactions ">
-
-                            <td>{{tran.Description}}</td>
-                            <td>{{tran.Type}}</td>
-                            <td>{{tran.Amount}}</td>
-                            <td>{{tran.Date}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-
-                        <button class="btn btn-sm btn-primary"
-                                type="button"
-                                ng-click="vm.cancelClick()">
-                            <i class="glyphicon glyphicon-remove-circle"></i>
-                            &nbsp;Back to member list
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
     </form>
 </div>
 
 @section scripts {
-    <script src="~/app.js"></script>
-    <script src="~/CondoController.js"></script>
+    <script src="~/JS/app.js"></script>
+    <script src="~/JS/CondoController.js"></script>
 }

@@ -38,6 +38,10 @@ namespace REPO
         public virtual DbSet<AmenityReservation> AmenityReservations { get; set; }
         public virtual DbSet<AmenityReservationStatus> AmenityReservationStatuses { get; set; }
 
+        public virtual DbSet<CondoTransactionType> CondoTransactionTypes { get; set; }
+
+        public virtual DbSet<CondoTransaction> CondoTransactions { get; set; }
+
         //public virtual DbSet<Member> MyEntities { get; set; }
 
         //public virtual DbSet<Member> MyEntities { get; set; }

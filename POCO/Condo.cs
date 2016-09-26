@@ -10,7 +10,10 @@ namespace POCO
     {
         virtual public int Id { get; set; }
         virtual public string  Name { get; set; }
+        virtual public decimal Balance { get; set; }
         virtual public ICollection<Member> Members { get; set; }
+
+      
 
     }
 }
