@@ -5,15 +5,17 @@
 <div ng-app="app"
      ng-controller="CondoController as vm">
     <form name="myForm" class="form-horizontal" novalidate>
-        @*Main*@
-        <div ng-show="vm.uiState.isMainAreaVisible" class="panel panel-primary">
-            <p>Some info here</p>
-            <br />
-            <hr />
 
-            <p>More info here</p> 
-            <br />
-            <hr />
+       
+        @*Main*@
+        <div ng-show="vm.uiState.isMainAreaVisible" class="panel panel-primary content-area sample-show-hide">
+            <p>Some info here</p>
+            <br/>
+            <hr/>
+
+            <p>More info here</p>
+            <br/>
+            <hr/>
             <button class="btn btn-sm btn-primary"
                     type="button"
                     ng-click="vm.addGeneralCharge(vm.condoId)">
@@ -24,7 +26,7 @@
         </div>
 
         @*View Transactions*@
-        <div ng-show="vm.uiState.isViewTransactionsVisible" class="panel panel-primary">
+        <div ng-show="vm.uiState.isViewTransactionsVisible" class="panel panel-primary content-area sample-show-hide">
             <div class="panel-heading">
                 <h1 class="panel-title">
                     View Transactions for id: {{vm.testId}}
@@ -34,23 +36,23 @@
                 <table id="transactionsTable"
                        class="table table-condensed table-bordered table-striped table-hover">
                     <thead>
-                        <tr>
+                    <tr>
 
-                            <th>Description</th>
-                            <th>Type</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                        </tr>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        <tr ng-repeat="tran in vm.transactions ">
+                    <tr ng-repeat="tran in vm.transactions ">
 
-                            <td>{{tran.Description}}</td>
-                            <td>{{tran.Type}}</td>
-                            <td>{{tran.Amount}}</td>
-                            <td>{{tran.Date}}</td>
-                        </tr>
+                        <td>{{tran.Description}}</td>
+                        <td>{{tran.Type}}</td>
+                        <td>{{tran.Amount}}</td>
+                        <td>{{tran.Date}}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -65,16 +67,25 @@
         </div>
 
         @*Add Payment *@
-        <div ng-show="vm.uiState.isAddPaymentVisible" class="panel panel-primary">
+        <div ng-show="vm.uiState.isAddPaymentVisible" class="panel panel-primary content-area sample-show-hide">
             <div class="panel-heading">
                 <h1 class="panel-title">
-                    Add General Charge for condo id: {{vm.condoId}}
+                    Add payment for condo id: {{vm.condoId}}
                 </h1>
             </div>
             <div class="panel-body">
                 <fieldset>
                     <div class="form-group">
+                        <label class="col-md-4 control-label" for="selectbasic">Transaction Type</label>
+                        <div class="col-md-4">
+                            <select ng-model="vm.selectedTrasnactionType" ng-options="x.Id as x.Name for x in vm.transactionTypes">
+                                <option style="display: none" value="">select a transaction Type</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-4 control-label" for="generalChargeAmount">Amount:</label>
+
                         <div class="col-md-4">
                             <input type="number" class="form-control input-md"
                                    id="generalChargeAmount"
@@ -82,12 +93,11 @@
                                    required
                                    @*ng-minlength="4"
                            ng-maxlength="150"*@
-                                   ng-model="vm.generalCharge.amount" />
+                                   ng-model="vm.generalCharge.amount"/>
                             <span class="help-block">Enter the amount of the general charge</span>
 
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Description:</label>
                         <div class="col-md-4">

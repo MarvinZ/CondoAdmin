@@ -6,7 +6,7 @@
      ng-controller="MemberController as vm">
     <form name="myForm" class="form-horizontal" novalidate>
         @*Main*@
-        <div ng-show="vm.uiState.isMainAreaVisible" class="panel panel-primary">
+        <div ng-show="vm.uiState.isMainAreaVisible" class="panel panel-primary content-area sample-show-hide">
 
             <button class="btn btn-sm btn-primary"
                     type="button"
@@ -88,7 +88,7 @@
             </table>
         </div>
         @*Add  Charge*@
-        <div ng-show="vm.uiState.isAddChargeVisible" class="panel panel-primary">
+        <div ng-show="vm.uiState.isAddChargeVisible" class="panel panel-primary content-area sample-show-hide">
 
             <div class="panel-heading">
                 <h1 class="panel-title">
@@ -145,7 +145,7 @@
 
         </div>
         @*Add General Charge*@
-        <div ng-show="vm.uiState.isAddGeneralChargeVisible" class="panel panel-primary">
+        <div ng-show="vm.uiState.isAddGeneralChargeVisible" class="panel panel-primary content-area sample-show-hide">
             <div class="panel-heading">
                 <h1 class="panel-title">
                     Add General Charge for condo id: {{vm.condoId}}
@@ -200,7 +200,7 @@
             </div>
         </div>
         @*Add Payment*@
-        <div ng-show="vm.uiState.isAddPaymentVisible" class="panel panel-primary">
+        <div ng-show="vm.uiState.isAddPaymentVisible" class="panel panel-primary content-area sample-show-hide">
 
             <div class="panel-heading">
                 <h1 class="panel-title">
@@ -258,7 +258,7 @@
             </div>
         </div>
         @*View Trasnactions*@
-        <div ng-show="vm.uiState.isViewTransactionsVisible" class="panel panel-primary">
+        <div ng-show="vm.uiState.isViewTransactionsVisible" class="panel panel-primary content-area sample-show-hide">
             <div class="panel-heading">
                 <h1 class="panel-title">
                     View Transactions for id: {{vm.testId}}

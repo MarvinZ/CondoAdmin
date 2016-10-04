@@ -49,7 +49,12 @@
                 "Date": "1/1/2020"
             }
         ];
-
+        vm.transactionTypes = [//"Seguridad", "Administracion"
+            { "Id": 1, "Name": "Seguridad" },
+            { "Id": 2, "Name": "Administracion" },
+            { "Id": 3, "Name": "Software" }
+        ];
+        vm.selectedTrasnactionType = 0;
       
         vm.payment = {
             CondoId: 1,

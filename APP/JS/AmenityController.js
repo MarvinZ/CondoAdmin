@@ -3,13 +3,24 @@
 
     angular.module('AmenityApp').controller('AmenityController', AmenityController);
 
-    function AmenityController(moment, alert, calendarConfig) {
-         //angular
+    function AmenityController(moment, alert, calendarConfig,$http) {
+        //angular
         //  .module('app') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
         //  .controller('CalendarController', function (moment, alert, calendarConfig) {
 
         var vm = this;
-        
+        var dataService = $http;
+        vm.isCalendarVisible = true;
+
+        vm.amenities = [
+            { "Id": 1, "Name": "Piscina" },
+            { "Id": 2, "Name": "Rancho 1" },
+            { "Id": 3, "Name": "Cancha de Tenis" }
+        ];
+        vm.selectedAmenity = 0;
+
+
+
         //These variables MUST be set as a minimum for the calendar to work
         vm.calendarView = 'month';
         vm.viewDate = new Date();
@@ -27,17 +38,17 @@
             }
         ];
         vm.events = [
-             {
-                 title: 'HardCoded',
-                 color: calendarConfig.colorTypes.warning,
-                 //startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-                 //endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-                 startsAt: moment().startOf('hour').toDate(),
-                 endsAt: moment().add(2, 'hour').toDate(),
-                 draggable: true,
-                 resizable: true,
-                 actions: actions
-             }
+             //{
+             //    title: 'HardCoded',
+             //    color: calendarConfig.colorTypes.warning,
+             //    //startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
+             //    //endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
+             //    startsAt: moment().startOf('hour').toDate(),
+             //    endsAt: moment().add(2, 'hour').toDate(),
+             //    draggable: true,
+             //    resizable: true,
+             //    actions: actions
+             //}
             // ,
             //{
             //    title: 'An event',
@@ -80,6 +91,31 @@
             });
         };
 
+        vm.selectedItemChanged = function () {
+            getReservationsByAmenityId(vm.selectedAmenity);
+            //vm.isCalendarVisible = true;
+        };
+
+        function getReservationsByAmenityId(id) {
+            //alert("getting the member list!");
+            // Call Web API to get a product
+            dataService.get("http://localhost:11618/api/AmenityReservations/GetAllReservationsByAmenityId/" + id)
+              .then(function (result) {
+                  // Display product
+                  vm.events = result.data;
+
+                  // Convert date to local date/time format
+                  //if (vm.product.IntroductionDate != null) {
+                  //    vm.product.IntroductionDate =
+                  //      new Date(vm.product.IntroductionDate).
+                  //      toLocaleDateString();
+                  //}
+              }, function (error) {
+                  handleException(error);
+              });
+        }
+
+
         vm.eventClicked = function (event) {
             alert.show('Clicked', event);
         };
@@ -101,5 +137,58 @@
             $event.stopPropagation();
             event[field] = !event[field];
         };
+
+        function handleException(error) {
+            vm.uiState.isValid = false;
+            var msg = {
+                property: 'Error',
+                message: ''
+            };
+
+            vm.uiState.messages = [];
+
+            switch (error.status) {
+                case 400:   // 'Bad Request'
+                    // Model state errors
+                    var errors = error.data.ModelState;
+                    //                    debugger;
+
+                    // Loop through and get all 
+                    // validation errors
+                    for (var key in errors) {
+                        for (var i = 0; i < errors[key].length;
+                                i++) {
+                            addValidationMessage(key,
+                                        errors[key][i]);
+                        }
+                    }
+
+                    break;
+
+                case 404:  // 'Not Found'
+                    msg.message = 'The product you were ' +
+                                  'requesting could not be found';
+                    vm.uiState.messages.push(msg);
+
+                    break;
+
+                case 500:  // 'Internal Error'
+                    msg.message =
+                      error.data.ExceptionMessage;
+                    vm.uiState.messages.push(msg);
+
+                    break;
+
+                default:
+                    msg.message = 'Status: ' +
+                                error.status +
+                                ' - Error Message: ' +
+                                error.statusText;
+                    vm.uiState.messages.push(msg);
+
+                    break;
+            }
+        }
+
     }
 })();

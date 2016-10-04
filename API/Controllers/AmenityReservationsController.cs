@@ -35,10 +35,37 @@ namespace API.Controllers
                 Id = rsv.Id,
                 Amenity = rsv.Amenity.Name,
                 Member = rsv.Member.Name,
-                Person = rsv.Person.FirstName+" "+rsv.Person.LastName,
-                StartDateTime = rsv.StartTime,
-                EndDateTime = rsv.EndDatetime,
-                Status = rsv.AmenityReservationStatus.Name
+                Person = rsv.Person.FirstName + " " + rsv.Person.LastName,
+                startsAt = rsv.StartTime,
+                endsAt = rsv.EndDatetime,
+                Status = rsv.AmenityReservationStatus.Name,
+                draggable = "true",
+                resizable = "true",
+                actions = "actions"
+
+            }).ToList();
+
+            return Ok(result);
+        }
+
+        public IHttpActionResult GetAllReservationsByAmenityId(int id)
+        {
+
+            var reservations = db.AmenityReservations.Where(e => e.AmenityId == id);
+
+            var result = reservations.Select(rsv => new ReservationDTO()
+            {
+                Id = rsv.Id,
+                Amenity = rsv.Amenity.Name,
+                Member = rsv.Member.Name,
+                Person = rsv.Person.FirstName + " " + rsv.Person.LastName,
+                startsAt = rsv.StartTime,
+                endsAt = rsv.EndDatetime,
+                Status = rsv.AmenityReservationStatus.Name,
+                draggable = "true",
+                resizable = "true",
+                actions = "actions",
+                title = rsv.Amenity.Name + "---"+ rsv.Member.Name
 
             }).ToList();
 
@@ -146,7 +173,15 @@ namespace API.Controllers
         public string Member { get; set; }
         public string Person { get; set; }
         public string Status { get; set; }
-        public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
+        public DateTime startsAt { get; set; }
+        public DateTime endsAt { get; set; }
+
+        public string title { get; set; }
+
+        public string draggable { get; set; }
+        public string resizable { get; set; }
+        public string actions { get; set; }
+
+
     }
 }

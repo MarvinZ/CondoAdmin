@@ -227,6 +227,33 @@ namespace REPO.Migrations
                     AmenityReservationStatusId = 1,
                     StartTime = DateTime.Now.AddDays(3),
                     EndDatetime = DateTime.UtcNow.AddDays(3)
+                }, new AmenityReservation()
+                {
+                    Id = 3,
+                    AmenityId = 2,
+                    MemberId = 2,
+                    PersonId = 3,
+                    AmenityReservationStatusId = 1,
+                    StartTime = DateTime.Now.AddDays(8),
+                    EndDatetime = DateTime.UtcNow.AddDays(8)
+                }, new AmenityReservation()
+                {
+                    Id = 4,
+                    AmenityId = 1,
+                    MemberId = 2,
+                    PersonId = 3,
+                    AmenityReservationStatusId = 1,
+                    StartTime = DateTime.Now.AddDays(6),
+                    EndDatetime = DateTime.UtcNow.AddDays(6)
+                }, new AmenityReservation()
+                {
+                    Id = 3,
+                    AmenityId = 2,
+                    MemberId = 2,
+                    PersonId = 3,
+                    AmenityReservationStatusId = 1,
+                    StartTime = DateTime.Now.AddDays(18),
+                    EndDatetime = DateTime.UtcNow.AddDays(18)
                 });
 
 
