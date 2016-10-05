@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+
     <div id="calendarBigDiv" ng-show="vm.isCalendarVisible">
         <h2 class="text-center">{{ vm.calendarTitle }}</h2>
 
@@ -50,12 +51,21 @@
             </div>
         </div>
         <br>
+        <h3 id="event-editor">
+             
+            <button class="btn btn-primary pull-right"
+                    ng-click="vm.addEvent()">
+                +Add new
+            </button>
+            <div class="clearfix"></div>
+        </h3>
         <mwl-calendar events="vm.events"
                       view="vm.calendarView"
                       view-title="vm.calendarTitle"
                       view-date="vm.viewDate"
                       on-event-click="vm.eventClicked(calendarEvent)"
                       on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+                      on-date-range-select ="vm.eventClicked(calendarEvent)"
                       cell-is-open="vm.isCellOpen"
                       day-view-start="06:00"
                       day-view-end="22:59"
@@ -63,14 +73,7 @@
                       cell-modifier="vm.modifyCell(calendarCell)">
         </mwl-calendar>
         <br><br><br>
-        <h3 id="event-editor">
-            Edit events
-            <button class="btn btn-primary pull-right"
-                    ng-click="vm.addEvent()">
-                Add new
-            </button>
-            <div class="clearfix"></div>
-        </h3>
+
         <table class="table table-bordered">
             <thead>
             <tr>

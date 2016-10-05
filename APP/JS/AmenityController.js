@@ -3,7 +3,7 @@
 
     angular.module('AmenityApp').controller('AmenityController', AmenityController);
 
-    function AmenityController(moment, alert, calendarConfig,$http) {
+    function AmenityController(moment, alert, alert2, calendarConfig, $http,$uibModal) {
         //angular
         //  .module('app') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
         //  .controller('CalendarController', function (moment, alert, calendarConfig) {
@@ -37,6 +37,19 @@
                 }
             }
         ];
+
+        vm.calendarNewEventEnd =
+        {
+            title: 'HardCoded',
+            color: calendarConfig.colorTypes.warning,
+            //startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
+            //endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
+            startsAt: moment().startOf('hour').toDate(),
+            endsAt: moment().add(2, 'hour').toDate(),
+            draggable: true,
+            resizable: true,
+            actions: actions
+        };
         vm.events = [
              //{
              //    title: 'HardCoded',
@@ -79,16 +92,25 @@
         ];
 
         vm.isCellOpen = true;
+        vm.openTest = function () {
+            $uibModal.open({
+                templateUrl: '/Content/Templates/modalContent2.html',
+                controller: 'ModalInstanceCtrl'
+            });
+          
+        };
 
         vm.addEvent = function () {
-            vm.events.push({
-                title: 'New event',
-                startsAt: moment().startOf('day').toDate(),
-                endsAt: moment().endOf('day').toDate(),
-                color: calendarConfig.colorTypes.important,
-                draggable: true,
-                resizable: true
-            });
+
+            alert2.show('Clicked', vm.calendarNewEventEnd);
+            //vm.events.push({
+            //    title: 'New event',
+            //    startsAt: moment().startOf('day').toDate(),
+            //    endsAt: moment().endOf('day').toDate(),
+            //    color: calendarConfig.colorTypes.important,
+            //    draggable: true,
+            //    resizable: true
+            //});
         };
 
         vm.selectedItemChanged = function () {
@@ -103,13 +125,6 @@
               .then(function (result) {
                   // Display product
                   vm.events = result.data;
-
-                  // Convert date to local date/time format
-                  //if (vm.product.IntroductionDate != null) {
-                  //    vm.product.IntroductionDate =
-                  //      new Date(vm.product.IntroductionDate).
-                  //      toLocaleDateString();
-                  //}
               }, function (error) {
                   handleException(error);
               });
@@ -119,6 +134,7 @@
         vm.eventClicked = function (event) {
             alert.show('Clicked', event);
         };
+
 
         vm.eventEdited = function (event) {
             alert.show('Edited', event);
