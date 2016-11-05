@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeliveryStatus.cs" />
+    <Compile Include="Courier.cs" />
     <Compile Include="Audit.cs" />
     <Compile Include="Amenity.cs" />
     <Compile Include="AmenityReservation.cs" />
+    <Compile Include="AeroOrderStatus.cs" />
+    <Compile Include="AeroOrder.cs" />
     <Compile Include="MemberPerson.cs" />
     <Compile Include="Condo.cs" />
     <Compile Include="GENERIC_CLASS.cs" />
